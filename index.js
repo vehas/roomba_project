@@ -6,16 +6,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-var PORT = 3000
+var PORT = process.env.PORT || 5000
 var db = { info : "init server"}
 app.get('/', function (req, res) {
   res.send(db)
 })
 
 app.post('/', function (req, res) {
-  console.log(req.body)
   Object.assign(db, req.body)
-  res.send('Hello :' + JSON.stringify(db) )
+  console.log("db : " + JSON.stringify(db))
+  res.send(db)
 })
 
 app.listen(PORT, function () {
